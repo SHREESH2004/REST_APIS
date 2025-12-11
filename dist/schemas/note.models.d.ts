@@ -1,2 +1,2 @@
-export declare const NotesModel: any;
+export {};
 //# sourceMappingURL=note.models.d.ts.map

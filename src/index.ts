@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express, { Application } from "express";
-import connectDB from "./config/db";
+
 import app from "./app";
 
 dotenv.config();
@@ -10,7 +10,6 @@ const DB_URL = process.env.CONNECT_URL || "mongodb://localhost:27017/notes";
 
 async function startServer(): Promise<void> {
   try {
-    await connectDB(DB_URL);
 
     app.listen(PORT, () => {
       console.log(`Server running at http://localhost:${PORT}`);
