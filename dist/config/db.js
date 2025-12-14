@@ -15,10 +15,10 @@ const prisma = new client_1.PrismaClient({
 const connectToDB = async () => {
     try {
         await prisma.$connect();
-        console.log("✅ Prisma connected to PostgreSQL");
+        console.log("Prisma connected to PostgreSQL");
     }
     catch (err) {
-        console.error("❌ Prisma connection failed:", err);
+        console.error("Prisma connection failed:", err);
         process.exit(1);
     }
 };
@@ -27,10 +27,10 @@ const disconnectDB = async () => {
     try {
         await prisma.$disconnect();
         await pool.end();
-        console.log("🛑 Prisma disconnected");
+        console.log("Prisma and Postgres disconnected");
     }
     catch (err) {
-        console.error("❌ Prisma disconnect failed:", err);
+        console.error("Prisma and Postgres disconnect failed:", err);
     }
 };
 exports.disconnectDB = disconnectDB;
