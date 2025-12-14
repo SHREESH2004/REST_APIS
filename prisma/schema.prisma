@@ -13,3 +13,34 @@ model User {
   password  String
   createdAt DateTime @default(now())
 }
+
+model Movie {
+  id         Int      @id @default(autoincrement())
+  title      String
+  overview   String
+  genre      String
+  runtime    Int
+  releasedAt DateTime
+  rating     Float
+  language   String
+  posterUrl  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Watchlist {
+  id       Int             @id @default(autoincrement())
+  status   WatchStatus @default(PLANNED)
+  userId   Int   @unique
+  movieId  Int   @unique
+  createdAt DateTime @default(now())
+
+  
+}
+
+enum WatchStatus {
+  PLANNED
+  WATCHING
+  COMPLETED
+  DROPPED
+}
