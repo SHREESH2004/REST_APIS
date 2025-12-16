@@ -37,6 +37,4 @@ export const registerController = async (req: Request, res: Response) => {
             message: "User Already Exists"
         })
     }
-
-
 }
