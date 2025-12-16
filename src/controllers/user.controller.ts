@@ -1,7 +1,12 @@
 import { registerservice } from "../services/user.services";
-import { Request } from "express";
+import { Request, Response } from "express";
 
-export const registerController=()=>{
-    
+export const registerController = (req: Request, res: Response) => {
+    const body = req.body;
+    res.json({
+        message: body,
+        status: 200
+    })
+
 
 }
