@@ -1,8 +1,14 @@
-import e from "express";
-import { registerController } from "../controllers/user.controller";
+import express from "express";
+import {
+    registerController,
+    loginController,
+    updateController,
+} from "../controllers/user.controller";
 
-const router=e.Router();
+const router = express.Router();
 
-router.post("/register",registerController);
+router.post("/register", registerController);
+router.post("/login", loginController);
+router.put("/update/:id", updateController);
 
 export default router;
