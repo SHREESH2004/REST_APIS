@@ -5,9 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerController = void 0;
 const db_1 = __importDefault(require("../config/db"));
-const registerController = (req, res) => {
+const registerController = async (req, res) => {
     const { name, email, password } = req.body;
-    const userExists = db_1.default.user.findUnique({
+    const userExists = await db_1.default.user.findUnique({
         where: { email: email }
     });
     if (!userExists) {

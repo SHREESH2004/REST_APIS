@@ -2,15 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.disconnectDB = exports.connectToDB = void 0;
 const client_1 = require("@prisma/client");
-const adapter_pg_1 = require("@prisma/adapter-pg");
-const pg_1 = require("pg");
-const pool = new pg_1.Pool({
-    connectionString: process.env.DATABASE_URL,
-});
-const adapter = new adapter_pg_1.PrismaPg(pool);
 const prisma = new client_1.PrismaClient({
-    adapter,
-    log: ["query", "info", "warn", "error"],
+    log: ["query", "warn", "error"],
 });
 const connectToDB = async () => {
     try {
@@ -26,11 +19,10 @@ exports.connectToDB = connectToDB;
 const disconnectDB = async () => {
     try {
         await prisma.$disconnect();
-        await pool.end();
-        console.log("Prisma and Postgres disconnected");
+        console.log("Prisma disconnected");
     }
     catch (err) {
-        console.error("Prisma and Postgres disconnect failed:", err);
+        console.error("Prisma disconnect failed:", err);
     }
 };
 exports.disconnectDB = disconnectDB;

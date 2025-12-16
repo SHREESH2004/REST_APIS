@@ -1,16 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { Pool } from "pg";
 
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
-const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({
-  adapter,
-  log: ["query", "info", "warn", "error"],
+  log: ["query", "warn", "error"],
 });
+
 
 export const connectToDB = async () => {
   try {
@@ -25,10 +18,9 @@ export const connectToDB = async () => {
 export const disconnectDB = async () => {
   try {
     await prisma.$disconnect();
-    await pool.end(); 
-    console.log("Prisma and Postgres disconnected");
+    console.log("Prisma disconnected");
   } catch (err) {
-    console.error("Prisma and Postgres disconnect failed:", err);
+    console.error("Prisma disconnect failed:", err);
   }
 };
 
