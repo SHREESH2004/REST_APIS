@@ -44,39 +44,40 @@ export const registerController = async (req: Request, res: Response) => {
 
 
 export const loginController = async (req: Request, res: Response) => {
-  try {
-    const { email, password } = req.body;
+    try {
+        const { email, password } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({
-        message: "Email and password are required",
-      });
+        if (!email || !password) {
+            return res.status(400).json({
+                message: "Email and password are required",
+            });
+        }
+
+        const user = await loginservice({ email, password });
+
+        const token = generateToken({
+            id: user.id,
+            email: user.email
+
+        }, res);
+
+        return res.status(200).json({
+            message: "Login successful",
+            token,
+            user,
+        });
+
+    } catch (error: any) {
+        if (error.message === "INVALID_CREDENTIALS") {
+            return res.status(401).json({
+                message: "Invalid email or password",
+            });
+        }
+
+        return res.status(500).json({
+            message: "Internal Server Error",
+        });
     }
-
-    const user = await loginservice({ email, password });
-
-    const token = generateToken({
-      id: user.id,
-      email: user.email,
-    });
-
-    return res.status(200).json({
-      message: "Login successful",
-      token,
-      user,
-    });
-
-  } catch (error: any) {
-    if (error.message === "INVALID_CREDENTIALS") {
-      return res.status(401).json({
-        message: "Invalid email or password",
-      });
-    }
-
-    return res.status(500).json({
-      message: "Internal Server Error",
-    });
-  }
 };
 
 

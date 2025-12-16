@@ -17,8 +17,8 @@ export declare const registerservice: ({ name, email, password, }: RegisterInput
     name: string;
     email: string;
     password: string;
-    createdAt: Date;
     id: number;
+    createdAt: Date;
 }>;
 export declare const loginservice: ({ email, password, }: LoginInput) => Promise<{
     id: number;
@@ -29,8 +29,8 @@ export declare const updateservice: ({ id, name, email, password, }: UpdateInput
     name: string;
     email: string;
     password: string;
-    createdAt: Date;
     id: number;
+    createdAt: Date;
 }>;
 export {};
 //# sourceMappingURL=user.services.d.ts.map

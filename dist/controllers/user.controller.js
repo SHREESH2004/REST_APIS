@@ -44,8 +44,8 @@ const loginController = async (req, res) => {
         const user = await (0, user_services_1.loginservice)({ email, password });
         const token = (0, toke_1.generateToken)({
             id: user.id,
-            email: user.email,
-        });
+            email: user.email
+        }, res);
         return res.status(200).json({
             message: "Login successful",
             token,
