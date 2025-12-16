@@ -2,9 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerController = void 0;
 const registerController = (req, res) => {
-    const body = req.body;
+    const { name, email, password } = req.body;
     res.status(200).json({
-        data: body,
+        data: {
+            name: name,
+            email: email,
+            password: password
+        },
     });
 };
 exports.registerController = registerController;
