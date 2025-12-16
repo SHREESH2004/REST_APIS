@@ -3,9 +3,8 @@ import { Request, Response } from "express";
 
 export const registerController = (req: Request, res: Response) => {
     const body = req.body;
-    res.json({
-        message: body,
-        status: 200
+    res.status(200).json({
+        data: body,
     })
 
 
