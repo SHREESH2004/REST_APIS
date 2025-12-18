@@ -121,17 +121,19 @@ export const updateController = async (req: Request, res: Response) => {
     }
 };
 
-export const logoutController=async(req:Request,res:Response)=>{
-    try{
-        res.cookie("jwt","",{
-            httpOnly:true,
-            expires:new Date(0)
-        })
-        res.status(200).json({
-            message:"Logged out succesfully",
-        })
+export const logoutController = async (req: Request, res: Response) => {
+    try {
+        res.cookie("jwt", "", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            expires: new Date(0)
+        });
+        
+        return res.status(200).json({
+            message: "Logged out successfully",
+        });
+    } catch (err) {
+        return res.status(500).json({ message: "Internal server error" });
     }
-    catch(err){
-        console.log(err);
-    }
-}
+};

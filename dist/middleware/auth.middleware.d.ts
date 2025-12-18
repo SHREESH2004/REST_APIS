@@ -1,2 +1,8 @@
-export declare const authmiddleware: () => Promise<void>;
+import { Request, Response, NextFunction } from "express";
+export interface AuthRequest extends Request {
+    user?: {
+        id: number;
+    };
+}
+export declare const authmiddleware: (req: AuthRequest, res: Response, next: NextFunction) => Promise<Response<any, Record<string, any>> | undefined>;
 //# sourceMappingURL=auth.middleware.d.ts.map
