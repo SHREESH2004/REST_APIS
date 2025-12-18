@@ -2,6 +2,7 @@ import express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import userRouter from "./routes/user.routes.js"
+import watchRouter from "./routes/watchlist.routes.js"
 dotenv.config();
 const app: Application = express();
 
@@ -14,5 +15,6 @@ app.get("/health", (_req, res) => {
 });
 
 app.use("/user",userRouter);
+app.use("/watch",watchRouter)
 
 export default app;
