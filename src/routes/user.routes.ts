@@ -3,6 +3,7 @@ import {
     registerController,
     loginController,
     updateController,
+    logoutController,
 } from "../controllers/user.controller";
 
 const router = express.Router();
@@ -10,5 +11,6 @@ const router = express.Router();
 router.post("/register", registerController);
 router.post("/login", loginController);
 router.put("/update/:id", updateController);
+router.post("/logout",logoutController)
 
 export default router;

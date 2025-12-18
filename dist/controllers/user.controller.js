@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateController = exports.loginController = exports.registerController = void 0;
+exports.logoutController = exports.updateController = exports.loginController = exports.registerController = void 0;
 const user_services_1 = require("../services/user.services");
 const toke_1 = require("../utils/toke");
 const registerController = async (req, res) => {
@@ -48,7 +48,6 @@ const loginController = async (req, res) => {
         }, res);
         return res.status(200).json({
             message: "Login successful",
-            token,
             user,
         });
     }
@@ -100,4 +99,19 @@ const updateController = async (req, res) => {
     }
 };
 exports.updateController = updateController;
+const logoutController = async (req, res) => {
+    try {
+        res.cookie("jwt", "", {
+            httpOnly: true,
+            expires: new Date(0)
+        });
+        res.status(200).json({
+            message: "Logged out succesfully",
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
+exports.logoutController = logoutController;
 //# sourceMappingURL=user.controller.js.map
