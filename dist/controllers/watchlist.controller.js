@@ -43,11 +43,9 @@ const addToWatchlist = async (req, res) => {
         });
     }
     catch (error) {
-        // P2002: Unique constraint failed (user already has this movie in list)
         if (error.code === 'P2002') {
             return res.status(409).json({ message: "This movie is already in your watchlist" });
         }
-        // P2003: Foreign key constraint failed (e.g., User ID in token doesn't exist in DB)
         if (error.code === 'P2003') {
             return res.status(400).json({ message: "Invalid user or movie reference" });
         }
