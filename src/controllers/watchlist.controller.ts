@@ -22,7 +22,7 @@ export const addToWatchlist = async (req: AuthRequest, res: Response) => {
         }
         const movie = await prisma.movie.findUnique({
             where: { id: numericMovieId },
-            select: { id: true } 
+            select: { id: true }
         });
 
         if (!movie) {
@@ -30,12 +30,12 @@ export const addToWatchlist = async (req: AuthRequest, res: Response) => {
         }
         const newItem = await prisma.watchlist.create({
             data: {
-                userId: authenticatedUserId, 
+                userId: authenticatedUserId,
                 movieId: numericMovieId,
-                status: WatchStatus.PLANNED 
+                status: WatchStatus.PLANNED
             },
             include: {
-                movie: true 
+                movie: true
             }
         });
 
@@ -56,3 +56,36 @@ export const addToWatchlist = async (req: AuthRequest, res: Response) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
+export const getwatchList = async (req: AuthRequest, res: Response) => {
+    try {
+        const authenticatedUserId = req.user?.id;
+
+        if (!authenticatedUserId) {
+            return res.status(401).json({ message: "Unauthorized: User session not found" });
+        }
+
+        const watchlist = await prisma.watchlist.findMany({
+            where: {
+                userId: authenticatedUserId
+            },
+            include: {
+                movie: true
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        })
+        return res.status(200).json({
+            message: "Watchlist retrieved successfully",
+            count: watchlist.length,
+            data: watchlist
+        });
+    }
+    catch (err) {
+        console.error("[WATCHLIST_GET_ERROR]:", err);
+        return res.status(500).json({ message: "Internal server error" });
+
+    }
+
+}

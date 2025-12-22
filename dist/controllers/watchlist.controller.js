@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addToWatchlist = void 0;
+exports.getwatchList = exports.addToWatchlist = void 0;
 const db_1 = __importDefault(require("../config/db"));
 const client_1 = require("@prisma/client");
 const addToWatchlist = async (req, res) => {
@@ -54,4 +54,33 @@ const addToWatchlist = async (req, res) => {
     }
 };
 exports.addToWatchlist = addToWatchlist;
+const getwatchList = async (req, res) => {
+    try {
+        const authenticatedUserId = req.user?.id;
+        if (!authenticatedUserId) {
+            return res.status(401).json({ message: "Unauthorized: User session not found" });
+        }
+        const watchlist = await db_1.default.watchlist.findMany({
+            where: {
+                userId: authenticatedUserId
+            },
+            include: {
+                movie: true
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        });
+        return res.status(200).json({
+            message: "Watchlist retrieved successfully",
+            count: watchlist.length,
+            data: watchlist
+        });
+    }
+    catch (err) {
+        console.error("[WATCHLIST_GET_ERROR]:", err);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+exports.getwatchList = getwatchList;
 //# sourceMappingURL=watchlist.controller.js.map

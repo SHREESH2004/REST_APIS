@@ -8,5 +8,6 @@ const watchlist_controller_1 = require("../controllers/watchlist.controller");
 const auth_middleware_1 = require("../middleware/auth.middleware");
 const router = express_1.default.Router();
 router.post('/addlist', auth_middleware_1.authmiddleware, watchlist_controller_1.addToWatchlist);
+router.get('/getlist', auth_middleware_1.authmiddleware, watchlist_controller_1.getwatchList);
 exports.default = router;
 //# sourceMappingURL=watchlist.routes.js.map
