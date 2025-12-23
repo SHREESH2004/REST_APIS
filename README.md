@@ -1,6 +1,6 @@
 # 🎬 CineTrack API
 
-A premium **TypeScript** backend designed for cinema lovers to curate and manage their personal movie collections. This API leverages **Node.js**, **Express**, and **Prisma** to provide a high-performance, type-safe experience.
+A premium **TypeScript** backend designed for cinema lovers to curate and manage their personal movie collections. This API leverages **Node.js**, **Express**, and **Prisma** to provide a high-performance, type-safe experience
 
 ---
 
