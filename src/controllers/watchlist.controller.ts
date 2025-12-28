@@ -21,9 +21,6 @@ export const addToWatchlist = async (req: AuthRequest, res: Response) => {
             where: { id: numericMovieId },
             select: { id: true }
         });
-
-
-
         if (!movie) {
             return res.status(404).json({ message: "Movie not found" });
         }
