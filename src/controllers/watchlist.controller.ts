@@ -47,7 +47,6 @@ export const addToWatchlist = async (req: AuthRequest, res: Response) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
-
 export const getwatchList = async (req: AuthRequest, res: Response) => {
     try {
         const authenticatedUserId = req.user?.id;
