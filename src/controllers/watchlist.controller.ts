@@ -60,6 +60,7 @@ export const getwatchList = async (req: AuthRequest, res: Response) => {
             include: { movie: true },
             orderBy: { createdAt: 'desc' }
         });
+        
 
         return res.status(200).json({
             message: "Watchlist retrieved successfully",
